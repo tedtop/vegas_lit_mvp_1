@@ -1,8 +1,8 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:vegas_lit/models/tab.dart';
 import 'package:vegas_lit/router/router.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class NavigationBloc extends Bloc<int, int> {
   NavigationBloc() : super(NavigationTabs.first);
@@ -62,9 +62,9 @@ class NavigationTabs {
   /// static fields and you should not instantiate it.
   NavigationTabs._();
 
-  static const first = 1;
-  static const second = 2;
-  static const third = 3;
-  static const fourth = 4;
-  static const fifth = 5;
+  static const first = 0;
+  static const second = 1;
+  static const third = 2;
+  static const fourth = 3;
+  static const fifth = 4;
 }

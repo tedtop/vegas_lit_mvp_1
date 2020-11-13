@@ -16,47 +16,69 @@ class Root extends StatelessWidget {
       builder: (context, state) {
         return WillPopScope(
           onWillPop: bloc.onWillPop,
-          child: Scaffold(
-            body: IndexedStack(
-              index: state,
-              children: List.generate(bloc.tabs.length, (index) {
-                final tab = bloc.tabs[index];
+          child: Container(
+            color: MyColors.darkGrey,
+            child: SafeArea(
+              child: Scaffold(
+                body: IndexedStack(
+                  index: state,
+                  children: List.generate(bloc.tabs.length, (index) {
+                    final tab = bloc.tabs[index];
 
-                return TickerMode(
-                  enabled: index == state,
-                  child: Offstage(
-                    offstage: index != state,
-                    child: ExtendedNavigator(
-                      initialRoute: tab.initialRoute,
-                      name: tab.name,
-                      router: AppRouter(),
-                    ),
-                  ),
-                );
-              }),
-            ),
-            bottomNavigationBar: CustomNavigationBar(
-              isFloating: true,
-              iconSize: 30.0,
-              selectedColor: MyColors.white,
-              strokeColor: MyColors.white,
-              unSelectedColor: MyColors.white,
-              backgroundColor: MyColors.darkGrey,
-              borderRadius: Radius.circular(20.0),
-              onTap: bloc.add,
-              currentIndex: state,
-              items: bloc.tabs.map((tab) {
-                return CustomNavigationBarItem(
-                  badgeCount: 0,
-                  showBadge: false,
-                  icon: tab.icon,
-                  // label: tab.name,
-                );
-              }).toList(),
+                    return TickerMode(
+                      enabled: index == state,
+                      child: Offstage(
+                        offstage: index != state,
+                        child: ExtendedNavigator(
+                          initialRoute: tab.initialRoute,
+                          name: tab.name,
+                          router: AppRouter(),
+                        ),
+                      ),
+                    );
+                  }),
+                ),
+                bottomNavigationBar: _buildBottomNavigationBar(bloc, state),
+              ),
             ),
           ),
         );
       },
+    );
+  }
+
+  _buildBottomNavigationBar(NavigationBloc bloc, int state) {
+    return BottomNavigationBar(
+      elevation: 0.0,
+      iconSize: 30.0,
+      onTap: bloc.add,
+      currentIndex: state,
+      items: bloc.tabs.map((tab) {
+        return BottomNavigationBarItem(
+          icon: Icon(tab.icon),
+          label: tab.name,
+        );
+      }).toList(),
+    );
+  }
+
+  _buildCustomNavigationBar(NavigationBloc bloc, int state) {
+    return CustomNavigationBar(
+      elevation: 0.0,
+      iconSize: 30.0,
+      selectedColor: MyColors.green,
+      strokeColor: MyColors.white,
+      unSelectedColor: MyColors.white,
+      backgroundColor: MyColors.darkGrey,
+      onTap: bloc.add,
+      currentIndex: state,
+      items: bloc.tabs.map((tab) {
+        return CustomNavigationBarItem(
+          badgeCount: 0,
+          showBadge: false,
+          icon: tab.icon,
+        );
+      }).toList(),
     );
   }
 }

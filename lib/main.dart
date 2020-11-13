@@ -15,8 +15,16 @@ class App extends StatelessWidget {
       child: MaterialApp(
         title: 'Vegas Lit',
         theme: ThemeData(
-          canvasColor: MyColors.lightGrey,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
+          primaryColor: MyColors.darkGrey,
+          canvasColor: MyColors.darkGrey,
+          // visualDensity: VisualDensity.adaptivePlatformDensity,
+          // cardTheme: CardTheme(
+          //   shape: RoundedRectangleBorder(
+          //     borderRadius: const BorderRadius.all(
+          //       Radius.circular(8.0),
+          //     ),
+          //   ),
+          // ),
         ),
         builder: ExtendedNavigator.builder(
           router: AppRouter(),

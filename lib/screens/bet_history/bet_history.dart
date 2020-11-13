@@ -3,8 +3,6 @@ import 'package:vegas_lit/shared/app_bar.dart';
 import 'package:vegas_lit/style.dart';
 
 class BetHistory extends StatelessWidget {
-  static const route = '/bet_history';
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
