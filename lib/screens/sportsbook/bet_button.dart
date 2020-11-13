@@ -1,33 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:vegas_lit/style.dart';
 
-class BetButton extends StatelessWidget {
-  final String text;
-  // bool active = false;
+class BetButton extends StatefulWidget {
+  BetButton({Key key, this.text}) : super(key: key);
 
-  BetButton({this.text});
+  final String text;
+
+  @override
+  _BetButtonState createState() => _BetButtonState();
+}
+
+class _BetButtonState extends State<BetButton> {
+  bool _selected = false;
 
   Widget build(
     BuildContext context, {
     @required String text,
   }) {
-    Color color = MyColors.lightGrey;
-    TextStyle style = MyStyles.betBtnText;
-
-    // if (this.active) {
-    //   color = MyColors.green;
-    //   style = MyStyles.betBtnTextSelected;
-    // }
-
     return Expanded(
       child: RaisedButton(
         elevation: MyStyles.elevation,
-        color: color,
+        color: _selected ? MyColors.green : MyColors.lightGrey,
         child: Text(
-          this.text,
-          style: style,
+          widget.text,
+          style: _selected ? MyStyles.betBtnTextSelected : MyStyles.betBtnText,
         ),
-        onPressed: () {},
+        onPressed: () => setState(() => _selected = !_selected),
       ),
     );
   }
