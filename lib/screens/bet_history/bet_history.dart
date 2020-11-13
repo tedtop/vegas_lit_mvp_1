@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:vegas_lit/shared/app_bar.dart';
-import 'package:vegas_lit/shared/bottom_navigation_bar.dart';
 import 'package:vegas_lit/style.dart';
 
 class BetHistory extends StatelessWidget {

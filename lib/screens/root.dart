@@ -1,53 +1,56 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
+import 'package:vegas_lit/bloc/navigation_bloc.dart';
+import 'package:vegas_lit/router/router.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:vegas_lit/providers/navigation_provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vegas_lit/style.dart';
 
 class Root extends StatelessWidget {
-  static const route = '/';
-
   @override
   Widget build(BuildContext context) {
-    return Consumer<NavigationProvider>(
-      builder: (context, provider, child) {
-        final bottomNavigationBarItems = provider.screens
-            .map((screen) => CustomNavigationBarItem(icon: Icons.home));
+    final bloc = context.bloc<NavigationBloc>();
 
-        final bottomNavigationBarItemsList = List<CustomNavigationBarItem>();
-        bottomNavigationBarItems
-            .forEach((element) => bottomNavigationBarItemsList.add(element));
-
-        final screens = provider.screens
-            .map(
-              (screen) => Offstage(
-                offstage: screen != provider.currentScreen,
-                child: Navigator(
-                  key: screen.navigatorState,
-                  onGenerateRoute: screen.onGenerateRoute,
-                ),
-              ),
-            )
-            .toList();
-
+    return BlocBuilder<NavigationBloc, int>(
+      cubit: bloc,
+      builder: (context, state) {
         return WillPopScope(
-          onWillPop: provider.onWillPop,
+          onWillPop: bloc.onWillPop,
           child: Scaffold(
             body: IndexedStack(
-              children: screens,
-              index: provider.currentTabIndex,
+              index: state,
+              children: List.generate(bloc.tabs.length, (index) {
+                final tab = bloc.tabs[index];
+
+                return TickerMode(
+                  enabled: index == state,
+                  child: Offstage(
+                    offstage: index != state,
+                    child: ExtendedNavigator(
+                      initialRoute: tab.initialRoute,
+                      name: tab.name,
+                      router: AppRouter(),
+                    ),
+                  ),
+                );
+              }),
             ),
             bottomNavigationBar: CustomNavigationBar(
+              isFloating: true,
               iconSize: 30.0,
               selectedColor: MyColors.white,
               strokeColor: MyColors.white,
               unSelectedColor: MyColors.white,
               backgroundColor: MyColors.darkGrey,
-              borderRadius: Radius.circular(6.0),
-              isFloating: true,
-              items: bottomNavigationBarItemsList,
-              currentIndex: provider.currentTabIndex,
-              onTap: provider.setTab,
+              borderRadius: Radius.circular(20.0),
+              onTap: bloc.add,
+              currentIndex: state,
+              items: bloc.tabs.map((tab) {
+                return CustomNavigationBarItem(
+                  icon: tab.icon,
+                  // label: tab.name,
+                );
+              }).toList(),
             ),
           ),
         );
