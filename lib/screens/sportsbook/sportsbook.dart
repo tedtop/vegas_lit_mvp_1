@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:vegas_lit/screens/bet_slip/bet_slip.dart';
 import 'package:vegas_lit/shared/app_bar.dart';
 import 'package:vegas_lit/style.dart';
 
 class Sportsbook extends StatelessWidget {
-  static const route = '/sportsbook';
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       // extendBody for floating bar get better perfomance
       extendBody: true,
       appBar: header(),
+      // backgroundColor: MyColors.lightGrey,
       body: Column(
         children: [
           SizedBox(
@@ -73,20 +71,21 @@ class Sportsbook extends StatelessWidget {
               ),
             ),
           ),
-          RaisedButton(
-            onPressed: () {
-              Navigator.of(context, rootNavigator: false)
-                  .pushNamed(BetSlip.route);
-            },
-            child: Text('Push route with bottom bar'),
-          ),
-          RaisedButton(
-            onPressed: () {
-              Navigator.of(context, rootNavigator: true)
-                  .pushNamed(BetSlip.route);
-            },
-            child: Text('Push route without bottom bar'),
-          ),
+          // ElevatedButton(
+          //   onPressed: () {
+          //     ExtendedNavigator.of(context).push(Routes.openBets);
+          //   },
+          //   child: const Text('Push screen with bottom bar'),
+          // ),
+          // ElevatedButton(
+          //   onPressed: () {
+          //     ExtendedNavigator.of(
+          //       context,
+          //       rootRouter: true,
+          //     ).push(Routes.betHistory);
+          //   },
+          //   child: const Text('Push screen without bottom bar'),
+          // ),
         ],
       ),
     );

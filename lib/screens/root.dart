@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
-import 'package:vegas_lit/bloc/navigation_bloc.dart';
+import 'package:vegas_lit/provider/navigation_bloc.dart';
 import 'package:vegas_lit/router/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -47,6 +47,8 @@ class Root extends StatelessWidget {
               currentIndex: state,
               items: bloc.tabs.map((tab) {
                 return CustomNavigationBarItem(
+                  badgeCount: 0,
+                  showBadge: false,
                   icon: tab.icon,
                   // label: tab.name,
                 );

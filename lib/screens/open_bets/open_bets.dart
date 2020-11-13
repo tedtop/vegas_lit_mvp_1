@@ -3,8 +3,6 @@ import 'package:vegas_lit/shared/app_bar.dart';
 import 'package:vegas_lit/style.dart';
 
 class OpenBets extends StatelessWidget {
-  static const route = '/open_bets';
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

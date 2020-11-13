@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:vegas_lit/screens/bet_slip/bet_slip.dart';
 import 'package:vegas_lit/shared/app_bar.dart';
-import 'package:vegas_lit/shared/bottom_navigation_bar.dart';
 import 'package:vegas_lit/style.dart';
 
 class Leaderboard extends StatelessWidget {
-  static const route = '/leaderboard';
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
