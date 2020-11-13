@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:vegas_lit/models/game.dart';
+import 'package:vegas_lit/screens/sportsbook/bet_button.dart';
 import 'package:vegas_lit/shared/app_bar.dart';
 import 'package:vegas_lit/style.dart';
 
@@ -21,7 +22,7 @@ class _SportsbookState extends State<StatefulWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: header(),
+      appBar: VegasLitAppBar(),
       body: Container(
         color: MyColors.lightGrey,
         padding: const EdgeInsets.all(5.0),
@@ -73,40 +74,14 @@ class _SportsbookState extends State<StatefulWidget> {
                   style: MyStyles.h2,
                 ),
                 Text(
-                  '${game.schedule.date}',
-                  style: GoogleFonts.nunito(
-                    color: MyColors.white,
-                    fontSize: 12.0,
-                    fontWeight: FontWeight.w300,
-                  ),
-                ),
+                    DateFormat('EEEE, MMMM, c, y @ hh:mm a')
+                        .format(game.schedule.date.toLocal()),
+                    style: MyStyles.h4),
                 _oddsBoard(game),
               ],
             ),
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _betButton(Game game, String text, {active: false}) {
-    Color color = MyColors.lightGrey;
-    TextStyle style = MyStyles.betBtnText;
-
-    if (active) {
-      color = MyColors.green;
-      style = MyStyles.betBtnTextSelected;
-    }
-
-    return Expanded(
-      child: RaisedButton(
-        elevation: MyStyles.elevation,
-        color: color,
-        child: Text(
-          text,
-          style: style,
-        ),
-        onPressed: () {},
       ),
     );
   }
@@ -123,47 +98,70 @@ class _SportsbookState extends State<StatefulWidget> {
   }
 
   Widget _oddsBoard(game) {
-    return Container(
-      // decoration: BoxDecoration(border: Border.all(color: Colors.red)),
-      child: Column(children: [
+    return Column(
+      children: [
+        // Team names
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('${game.teams.away.mascot}', style: MyStyles.awayTeam),
+            Expanded(
+              child: Text(
+                '${game.teams.away.mascot}',
+                style: MyStyles.awayTeam,
+                textAlign: TextAlign.center,
+              ),
+            ),
             _betButtonSeparator('@', style: MyStyles.h1),
-            Text('${game.teams.home.mascot}', style: MyStyles.homeTeam),
+            Expanded(
+              child: Text(
+                '${game.teams.home.mascot}',
+                style: MyStyles.homeTeam,
+                textAlign: TextAlign.center,
+              ),
+            ),
           ],
         ),
+        // Moneyline odds
         Row(
           children: [
-            _betButton(
-              game,
-              '${game.odds[0].moneyline.current.awayOdds}',
-              active: true,
+            BetButton(
+              text: '${game.odds[0].moneyline.current.awayOdds}',
             ),
             _betButtonSeparator('ML'),
-            _betButton(game, '${game.odds[0].moneyline.current.homeOdds}'),
+            BetButton(
+              text: '${game.odds[0].moneyline.current.homeOdds}',
+            ),
           ],
         ),
+        // Spread odds
         Row(
           children: [
-            _betButton(game,
-                '${game.odds[0].spread.current.away}  ${game.odds[0].spread.current.awayOdds}'),
+            BetButton(
+              text:
+                  '${game.odds[0].spread.current.away}  ${game.odds[0].spread.current.awayOdds}',
+            ),
             _betButtonSeparator('PTS'),
-            _betButton(game,
-                '${game.odds[0].spread.current.home}  ${game.odds[0].spread.current.homeOdds}'),
+            BetButton(
+              text:
+                  '${game.odds[0].spread.current.home}  ${game.odds[0].spread.current.homeOdds}',
+            ),
           ],
         ),
+        // Total odds
         Row(
           children: [
-            _betButton(game,
-                'o${game.odds[0].total.current.total} ${game.odds[0].total.current.overOdds}'),
+            BetButton(
+              text:
+                  'o${game.odds[0].total.current.total} ${game.odds[0].total.current.overOdds}',
+            ),
             _betButtonSeparator('TOT'),
-            _betButton(game,
-                'u${game.odds[0].total.current.total} ${game.odds[0].total.current.underOdds}'),
+            BetButton(
+              text:
+                  'u${game.odds[0].total.current.total} ${game.odds[0].total.current.underOdds}',
+            ),
           ],
         ),
-      ]),
+      ],
     );
   }
 }

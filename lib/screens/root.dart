@@ -47,25 +47,6 @@ class Root extends StatelessWidget {
     );
   }
 
-  _buildBottomNavigationBar(NavigationBloc bloc, int state) {
-    return BottomNavigationBar(
-      elevation: 0.0,
-      iconSize: 30.0,
-      unselectedItemColor: MyColors.white,
-      selectedItemColor: MyColors.green,
-      showSelectedLabels: true,
-      showUnselectedLabels: false,
-      onTap: bloc.add,
-      currentIndex: state,
-      items: bloc.tabs.map((tab) {
-        return BottomNavigationBarItem(
-          icon: Icon(tab.icon),
-          label: tab.name,
-        );
-      }).toList(),
-    );
-  }
-
   _buildCustomNavigationBar(NavigationBloc bloc, int state) {
     return CustomNavigationBar(
       elevation: 0.0,

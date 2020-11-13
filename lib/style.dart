@@ -40,11 +40,18 @@ class MyStyles {
     fontWeight: FontWeight.w700,
   );
 
-  // For bet type dividers
+  // Bet type dividers
   static final TextStyle h3 = GoogleFonts.nunito(
     color: MyColors.white,
     fontSize: 14.0,
     fontWeight: FontWeight.w700,
+  );
+
+  // Game time
+  static final TextStyle h4 = GoogleFonts.nunito(
+    color: MyColors.white,
+    fontSize: 12.0,
+    fontWeight: FontWeight.w300,
   );
 
   // Bet button

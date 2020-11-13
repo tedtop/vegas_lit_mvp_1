@@ -8,7 +8,7 @@ class BetSlip extends StatelessWidget {
     return Scaffold(
       // extendBody for floating bar get better perfomance
       extendBody: true,
-      appBar: header(),
+      appBar: VegasLitAppBar(),
       backgroundColor: MyColors.lightGrey,
       body: Column(
         children: [
