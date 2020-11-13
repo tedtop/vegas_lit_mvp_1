@@ -18,14 +18,22 @@ class _BetButtonState extends State<BetButton> {
     @required String text,
   }) {
     return Expanded(
-      child: RaisedButton(
-        elevation: MyStyles.elevation,
-        color: _selected ? MyColors.green : MyColors.lightGrey,
-        child: Text(
-          widget.text,
-          style: _selected ? MyStyles.betBtnTextSelected : MyStyles.betBtnText,
+      child: Container(
+        // Padding around BetButton(s)
+        padding: EdgeInsets.all(5.0),
+        // decoration: BoxDecoration(border: Border.all(color: Colors.red)),
+        child: RaisedButton(
+          // Padding inside BetButton(s)
+          padding: EdgeInsets.all(10.0),
+          elevation: MyStyles.elevation,
+          color: _selected ? MyColors.green : MyColors.lightGrey,
+          child: Text(
+            widget.text,
+            style:
+                _selected ? MyStyles.betBtnTextSelected : MyStyles.betBtnText,
+          ),
+          onPressed: () => setState(() => _selected = !_selected),
         ),
-        onPressed: () => setState(() => _selected = !_selected),
       ),
     );
   }

@@ -19,7 +19,7 @@ class NavigationBloc extends Bloc<int, int> {
       initialRoute: Routes.sportsbook,
     ),
     NavigationTab(
-      name: 'Bet Slip',
+      name: 'BetSlip',
       icon: Feather.file_plus,
       initialRoute: Routes.betSlip,
     ),
@@ -29,12 +29,12 @@ class NavigationBloc extends Bloc<int, int> {
       initialRoute: Routes.leaderboard,
     ),
     NavigationTab(
-      name: 'Open Bets',
+      name: 'OpenBets',
       icon: Feather.file_text,
       initialRoute: Routes.openBets,
     ),
     NavigationTab(
-      name: 'Bet History',
+      name: 'BetHistory',
       icon: Feather.calendar,
       initialRoute: Routes.betHistory,
     ),

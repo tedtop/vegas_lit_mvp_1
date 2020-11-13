@@ -133,6 +133,7 @@ class _SportsbookState extends State<StatefulWidget> {
             ),
           ],
         ),
+        // SizedBox(height: 10.0),
         // Spread odds
         Row(
           children: [
@@ -147,6 +148,7 @@ class _SportsbookState extends State<StatefulWidget> {
             ),
           ],
         ),
+        // SizedBox(height: 10.0),
         // Total odds
         Row(
           children: [
