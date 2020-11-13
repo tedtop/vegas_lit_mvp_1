@@ -148,19 +148,19 @@ class _SportsbookState extends State<StatefulWidget> {
         Row(
           children: [
             _betButton(game,
-                '${game.odds[0].spread.current.away}       ${game.odds[0].spread.current.awayOdds}'),
+                '${game.odds[0].spread.current.away}  ${game.odds[0].spread.current.awayOdds}'),
             _betButtonSeparator('PTS'),
             _betButton(game,
-                '${game.odds[0].spread.current.home}       ${game.odds[0].spread.current.homeOdds}'),
+                '${game.odds[0].spread.current.home}  ${game.odds[0].spread.current.homeOdds}'),
           ],
         ),
         Row(
           children: [
             _betButton(game,
-                'o${game.odds[0].total.current.total}      ${game.odds[0].total.current.overOdds}'),
+                'o${game.odds[0].total.current.total} ${game.odds[0].total.current.overOdds}'),
             _betButtonSeparator('TOT'),
             _betButton(game,
-                'u${game.odds[0].total.current.total}      ${game.odds[0].total.current.underOdds}'),
+                'u${game.odds[0].total.current.total} ${game.odds[0].total.current.underOdds}'),
           ],
         ),
       ]),

@@ -17,14 +17,7 @@ class App extends StatelessWidget {
         theme: ThemeData(
           primaryColor: MyColors.darkGrey,
           canvasColor: MyColors.darkGrey,
-          // visualDensity: VisualDensity.adaptivePlatformDensity,
-          // cardTheme: CardTheme(
-          //   shape: RoundedRectangleBorder(
-          //     borderRadius: const BorderRadius.all(
-          //       Radius.circular(8.0),
-          //     ),
-          //   ),
-          // ),
+          visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         builder: ExtendedNavigator.builder(
           router: AppRouter(),

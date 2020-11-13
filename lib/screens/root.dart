@@ -38,7 +38,7 @@ class Root extends StatelessWidget {
                     );
                   }),
                 ),
-                bottomNavigationBar: _buildBottomNavigationBar(bloc, state),
+                bottomNavigationBar: _buildCustomNavigationBar(bloc, state),
               ),
             ),
           ),
@@ -51,6 +51,10 @@ class Root extends StatelessWidget {
     return BottomNavigationBar(
       elevation: 0.0,
       iconSize: 30.0,
+      unselectedItemColor: MyColors.white,
+      selectedItemColor: MyColors.green,
+      showSelectedLabels: true,
+      showUnselectedLabels: false,
       onTap: bloc.add,
       currentIndex: state,
       items: bloc.tabs.map((tab) {
@@ -66,9 +70,9 @@ class Root extends StatelessWidget {
     return CustomNavigationBar(
       elevation: 0.0,
       iconSize: 30.0,
-      selectedColor: MyColors.green,
       strokeColor: MyColors.white,
       unSelectedColor: MyColors.white,
+      selectedColor: MyColors.green,
       backgroundColor: MyColors.darkGrey,
       onTap: bloc.add,
       currentIndex: state,
