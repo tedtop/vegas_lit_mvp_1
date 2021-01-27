@@ -17,12 +17,12 @@ export 'router.gr.dart';
 /// You will declare `initialRoute` in each `ExtendedNavigator` accordingly.
 @MaterialAutoRouter(
   routes: [
-    MaterialRoute<void>(page: Root),
-    MaterialRoute<void>(page: Sportsbook),
-    MaterialRoute<void>(page: BetSlip),
-    MaterialRoute<void>(page: Leaderboard),
-    MaterialRoute<void>(page: OpenBets),
-    MaterialRoute<void>(page: BetHistory)
+    MaterialRoute<void>(path: "/", page: Root),
+    MaterialRoute<void>(path: "/sportsbook", page: Sportsbook),
+    MaterialRoute<void>(path: "/bets/slip", page: BetSlip),
+    MaterialRoute<void>(path: "/leaderboard", page: Leaderboard),
+    MaterialRoute<void>(path: "/bets/open", page: OpenBets),
+    MaterialRoute<void>(path: "/bets/history", page: BetHistory)
   ],
 )
 class $AppRouter {}

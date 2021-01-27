@@ -17,12 +17,12 @@ import '../screens/root.dart';
 import '../screens/sportsbook/sportsbook.dart';
 
 class Routes {
-  static const String root = '/Root';
-  static const String sportsbook = '/Sportsbook';
-  static const String betSlip = '/bet-slip';
-  static const String leaderboard = '/Leaderboard';
-  static const String openBets = '/open-bets';
-  static const String betHistory = '/bet-history';
+  static const String root = '/';
+  static const String sportsbook = '/sportsbook';
+  static const String betSlip = '/bets/slip';
+  static const String leaderboard = '/leaderboard';
+  static const String openBets = '/bets/open';
+  static const String betHistory = '/bets/history';
   static const all = <String>{
     root,
     sportsbook,

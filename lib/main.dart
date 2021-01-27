@@ -15,8 +15,12 @@ class App extends StatelessWidget {
       child: MaterialApp(
         title: 'Vegas Lit',
         theme: ThemeData(
-          primaryColor: MyColors.darkGrey,
+          brightness: Brightness.dark,
           canvasColor: MyColors.darkGrey,
+          primaryColor: MyColors.darkGrey,
+          primaryColorLight: MyColors.lightGrey,
+          primaryColorDark: MyColors.darkGrey,
+          textTheme: TextTheme(), // TODO: change global text colors
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         builder: ExtendedNavigator.builder(

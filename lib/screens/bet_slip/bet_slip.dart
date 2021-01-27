@@ -1,32 +1,162 @@
 import 'package:flutter/material.dart';
+import 'package:vegas_lit/models/game.dart';
+import 'package:vegas_lit/screens/sportsbook/bet_button.dart';
+import 'package:vegas_lit/shared/abstract_card.dart';
 import 'package:vegas_lit/shared/app_bar.dart';
+import 'package:vegas_lit/shared/date_countdown.dart';
 import 'package:vegas_lit/style.dart';
 
-class BetSlip extends StatelessWidget {
+class BetSlip extends StatefulWidget {
+  @override
+  createState() => _BetSlipState();
+}
+
+class _BetSlipState extends State<StatefulWidget> {
+  List<Game> games = [];
+
+  @override
+  void initState() {
+    super.initState();
+    loadData();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // extendBody for floating bar get better perfomance
-      extendBody: true,
       appBar: VegasLitAppBar(),
-      backgroundColor: MyColors.lightGrey,
-      body: Column(
+      body: Container(
+        color: MyColors.lightGrey,
+        padding: const EdgeInsets.all(5.0),
+        child: ListView.builder(
+          itemCount: this.games.length,
+          itemBuilder: _listViewItemBuilder,
+        ),
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          // Chat button action
+        },
+        label: Text('Support'),
+        icon: Icon(Icons.chat),
+        foregroundColor: MyColors.white,
+        backgroundColor: MyColors.red,
+      ),
+    );
+  }
+
+  loadData() async {
+    // final List<Game> games = await Game.fetchAllFromApi();
+    final List<Game> games = await Game.fetchAllFromMock();
+    setState(() {
+      this.games = games;
+    });
+  }
+
+  Widget _listViewItemBuilder(BuildContext context, int index) {
+    var game = this.games[index];
+
+    return AbstractCard([
+      Text(
+        // '${game.teams.away.team} ${game.teams.away.mascot} vs ${game.teams.home.team} ${game.teams.home.mascot}',
+        '${game.teams.away.mascot} vs ${game.teams.home.mascot}',
+        style: MyStyles.h2,
+      ),
+      DateCountdown(game),
+      Row(
         children: [
-          SizedBox(
-            height: 12,
-          ),
-          Card(
-            color: MyColors.darkGrey,
-            child: InkWell(
-              onTap: () {},
-              child: ListTile(
-                title:
-                    Text('BET SLIP', style: TextStyle(color: MyColors.white)),
-              ),
+          Center(
+            child: Container(
+              // Padding inside BetButton(s)
+              padding: EdgeInsets.all(10.0),
+              // elevation: MyStyles.elevation,
+              color: MyColors.green,
+              child: Text('BET BEARS TO WIN'),
+              // onPressed: () => {},
             ),
           ),
         ],
       ),
+    ]);
+  }
+
+  Widget _betButtonSeparator(String text, {TextStyle style}) {
+    return SizedBox(
+      width: 50,
+      child: Text(
+        text,
+        textAlign: TextAlign.center,
+        style: style ?? MyStyles.h3,
+      ),
+    );
+  }
+
+  Widget _oddsBoard(game) {
+    return Column(
+      children: [
+        // Team names
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(
+              child: Text(
+                '${game.teams.away.mascot}',
+                style: MyStyles.awayTeam,
+                textAlign: TextAlign.center,
+              ),
+            ),
+            _betButtonSeparator('@', style: MyStyles.h1),
+            Expanded(
+              child: Text(
+                '${game.teams.home.mascot}',
+                style: MyStyles.homeTeam,
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ],
+        ),
+        // Moneyline odds
+        Row(
+          children: [
+            BetButton(
+              text: '${game.odds[0].moneyline.current.awayOdds}',
+            ),
+            _betButtonSeparator('ML'),
+            BetButton(
+              text: '${game.odds[0].moneyline.current.homeOdds}',
+            ),
+          ],
+        ),
+        // SizedBox(height: 10.0),
+        // Spread odds
+        Row(
+          children: [
+            BetButton(
+              text:
+                  '${game.odds[0].spread.current.away}  ${game.odds[0].spread.current.awayOdds}',
+            ),
+            _betButtonSeparator('PTS'),
+            BetButton(
+              text:
+                  '${game.odds[0].spread.current.home}  ${game.odds[0].spread.current.homeOdds}',
+            ),
+          ],
+        ),
+        // SizedBox(height: 10.0),
+        // Total odds
+        Row(
+          children: [
+            BetButton(
+              text:
+                  'o${game.odds[0].total.current.total} ${game.odds[0].total.current.overOdds}',
+            ),
+            _betButtonSeparator('TOT'),
+            BetButton(
+              text:
+                  'u${game.odds[0].total.current.total} ${game.odds[0].total.current.underOdds}',
+            ),
+          ],
+        ),
+      ],
     );
   }
 }
