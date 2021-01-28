@@ -14,6 +14,7 @@ class App extends StatelessWidget {
       create: (context) => NavigationBloc(),
       child: MaterialApp(
         title: 'Vegas Lit',
+        onGenerateRoute: AppRouter(),
         theme: ThemeData(
           brightness: Brightness.dark,
           canvasColor: MyColors.darkGrey,

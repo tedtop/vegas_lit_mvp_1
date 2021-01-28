@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:http/http.dart';
-import 'package:vegas_lit/config.dart';
+import 'package:vegas_lit/config.sample.dart';
 
 const String jsonAssetPath = 'assets/json/games.json';
 const String apiEndpoint = 'https://rapidapi.p.rapidapi.com/games';
